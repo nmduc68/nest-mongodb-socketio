@@ -1,4 +1,8 @@
 import { ConfigModule, ConfigType } from '@nestjs/config';
+import {
+  RMessageModule,
+  RUserModule,
+} from '@src/interfaces/http/rest/api_v1/routeModules';
 
 import { AppController } from './app.controller';
 import { AppGatewayModule } from '@src/interfaces/app/app.module';
@@ -6,7 +10,6 @@ import { AppService } from './app.service';
 import DBConfig from '@src/config/database.config';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { RMessageModule } from '@src/interfaces/http/rest/api_v1/message/message.module';
 
 @Module({
   imports: [
@@ -30,6 +33,7 @@ import { RMessageModule } from '@src/interfaces/http/rest/api_v1/message/message
 
     AppGatewayModule,
     RMessageModule,
+    RUserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

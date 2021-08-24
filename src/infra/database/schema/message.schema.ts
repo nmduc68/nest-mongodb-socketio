@@ -7,7 +7,10 @@ export type MessageDocument = Message & Document;
 @Schema({ versionKey: false })
 export class Message {
   @Prop()
-  user: string;
+  username: string;
+
+  @Prop()
+  userId: string;
 
   @Prop()
   message: string;
