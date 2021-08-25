@@ -6,6 +6,7 @@ import {
   OnGatewayInit,
   OnGatewayConnection,
   OnGatewayDisconnect,
+  ConnectedSocket,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { Logger } from '@nestjs/common';
@@ -38,5 +39,10 @@ export class AppGateway
   handleMessage(@MessageBody() data: any) {
     this.messageService.create(data);
     this.server.emit('getMessages', data);
+  }
+
+  @SubscribeMessage('typingMessage')
+  typingMessage(@MessageBody() data: any, @ConnectedSocket() socket: Socket) {
+    socket.broadcast.emit('userTyping', data);
   }
 }
